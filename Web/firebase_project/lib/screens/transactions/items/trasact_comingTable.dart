@@ -6,13 +6,13 @@ import 'package:firebase_project/screens/transactions/transaction_Prototype.dart
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListTransactionSucc extends StatelessWidget {
-  ListTransactionSucc({
+class ListTransactionComing extends StatelessWidget {
+  ListTransactionComing({
     super.key,
-    required TransacSuccDataSource transacSuccDataSource,
-  }) : _transacSuccDataSource = transacSuccDataSource;
+    required TransacComingDataSource transacComingDataSource,
+  }) : _transacComingDataSource = transacComingDataSource;
 
-  final TransacSuccDataSource _transacSuccDataSource;
+  final TransacComingDataSource _transacComingDataSource;
   final DataGridController _dataGridController = DataGridController();
 
   @override
@@ -24,7 +24,7 @@ class ListTransactionSucc extends StatelessWidget {
           controller: _dataGridController,
           selectionMode: SelectionMode.single,
           // navigationMode: GridNavigationMode.cell,
-          source: _transacSuccDataSource,
+          source: _transacComingDataSource,
           // allowSorting: true,
           // allowEditing: true,
           allowFiltering: true,
@@ -183,8 +183,8 @@ class ListTransactionSucc extends StatelessWidget {
   }
 }
 
-class TransacSuccDataSource extends DataGridSource {
-  TransacSuccDataSource(List<TransactionPrototype> transaction) {
+class TransacComingDataSource extends DataGridSource {
+  TransacComingDataSource(List<TransactionPrototype> transaction) {
     dataGridRows = transaction
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell(columnName: 'ref', value: dataGridRow.ref),
@@ -233,15 +233,15 @@ class TransacSuccDataSource extends DataGridSource {
   }
 }
 
-class ReadPageTranSucc extends StatefulWidget {
-  ReadPageTranSucc({super.key});
+class ReadPageTranComing extends StatefulWidget {
+  ReadPageTranComing({super.key});
 
   @override
-  State<ReadPageTranSucc> createState() => _ReadPageTranSuccState();
+  State<ReadPageTranComing> createState() => _ReadPageTranComingState();
 }
 
-class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
-  late TransacSuccDataSource _transacSuccDataSource;
+class _ReadPageTranComingState extends State<ReadPageTranComing> {
+  late TransacComingDataSource _transacComingDataSource;
 
   //   @override
   // void initState() {
@@ -260,9 +260,9 @@ class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
             return Text("Something is wron ${snapshot.error}");
           } else if (snapshot.hasData) {
             final transactions = snapshot.data!;
-            _transacSuccDataSource = TransacSuccDataSource(transactions);
-            return ListTransactionSucc(
-                transacSuccDataSource: _transacSuccDataSource);
+            _transacComingDataSource = TransacComingDataSource(transactions);
+            return ListTransactionComing(
+                transacComingDataSource: _transacComingDataSource);
           } else {
             return const Center(child: CircularProgressIndicator());
           }
@@ -272,7 +272,7 @@ class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
   }
 
   Stream<List<TransactionPrototype>> readUsers() => FirebaseFirestore.instance
-      .collection("Transactions")
+      .collection("Transactions_coming")
       .snapshots()
       .map((snapshots) => snapshots.docs
           .map((doc) => TransactionPrototype.fromJson(doc.data()))

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_project/screens/transactions/items/trasact_succesTable.dart';
+import 'package:firebase_project/screens/transactions/items/trasact_comingTable.dart';
 import 'package:firebase_project/screens/transactions/transaction_Prototype.dart';
 import 'package:firebase_project/screens/items/headBox.dart';
 import 'package:badges/badges.dart' as badges;
@@ -71,9 +72,9 @@ class _TransactionsState extends State<Transactions>
                     const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
                 child: ReadPageTranSucc()),
             Container(
-              color: Colors.orange,
-              // child: const CustForm(),
-            ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+                child: ReadPageTranComing()),
             Container(
               color: Colors.white,
               child: const TransactionForm(),
@@ -111,7 +112,9 @@ class TabarNavigation extends StatelessWidget {
         tabs: const [
           badges.Badge(
             badgeContent: Text('3'),
-            child: Text("Transactions actuelles "),
+            child: Text(
+              "Transactions actuelles ",
+            ),
           ),
           badges.Badge(
             // badgeContent: Text('3'),

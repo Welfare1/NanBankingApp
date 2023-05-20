@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_project/constants.dart';
 import 'package:firebase_project/screens/items/headBox.dart';
+import 'package:firebase_project/screens/transactions/items/trasact_summary.dart';
+import 'package:firebase_project/screens/transactions/items/trasact_sumComming.dart';
 
 class Acceuil extends StatelessWidget {
   const Acceuil({super.key});
@@ -69,11 +71,17 @@ class Acceuil extends StatelessWidget {
                       children: [
                         const Text("Historique des transactions"),
                         Container(
-                          height: 400,
                           color: Colors.white,
+                          height: 400,
+                          // padding: const EdgeInsets.symmetric(
+                          //     horizontal: 2, vertical: 2),
+                          child: ReadPageTranSum(),
                         )
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    width: 2,
                   ),
                   Flexible(
                     flex: 2,
@@ -81,8 +89,11 @@ class Acceuil extends StatelessWidget {
                       children: [
                         const Text("Transactions  à venir"),
                         Container(
+                          color: Colors.white,
                           height: 400,
-                          color: Colors.teal,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 2, vertical: 2),
+                          child: ReadPageTranSumComing(),
                         )
                       ],
                     ),

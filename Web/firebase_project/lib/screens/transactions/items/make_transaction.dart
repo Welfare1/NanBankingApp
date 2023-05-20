@@ -130,7 +130,7 @@ class _TransactionForm extends State<TransactionForm> {
                                         TextCapitalization.characters,
                                     decoration: const InputDecoration(
                                         label: Text(
-                                          "N°Compte du l'Bénéficiaire",
+                                          "N°Compte du bénéficiaire",
                                         ),
                                         hintText: "NAWARXXXX",
                                         contentPadding: EdgeInsets.symmetric(
