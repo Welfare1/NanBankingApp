@@ -2,6 +2,7 @@ import 'package:firebase_project/screens/Customer/customers.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ListCustomer extends StatelessWidget {
   ListCustomer({
@@ -34,10 +35,10 @@ class ListCustomer extends StatelessWidget {
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Id',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Id',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'nom',
@@ -46,130 +47,130 @@ class ListCustomer extends StatelessWidget {
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Nom',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Nom',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'prenoms',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Prénoms',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Prénoms',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'dateNaissance',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Date de naissance',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Date de naissance',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'profession',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Profession',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Profession',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'numPce',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'N°Pièce Id',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('N°Pièce Id',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'numTel',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'N°téléphone',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('N°téléphone',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'solde',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Solde',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Solde',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'mail',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Adresse mail',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Adresse mail',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'sexe',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Sexe',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Sexe',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'typeCpt',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Type de compte',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Type de compte',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'gestionnaire',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Gestionnaire',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Gestionnaire',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'nombre de transaction',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Nb transactions',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Nb transactions',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
             GridColumn(
                 columnName: 'dateCreat',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Date de creation',
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  child: Text('Date de creation',
+                      overflow: TextOverflow.visible,
+                      style: GoogleFonts.lato(
+                          textStyle: Theme.of(context).textTheme.titleSmall)),
                 )),
           ]),
     );
@@ -217,7 +218,8 @@ class CustomerDataSource extends DataGridSource {
                 dataGridCell.columnName == 'dateCreat')
             ? Alignment.centerRight
             : Alignment.centerLeft,
-        child: Text(dataGridCell.value.toString()),
+        child: Text(dataGridCell.value.toString(),
+            style: GoogleFonts.poppins(fontSize: 12)),
       );
     }).toList());
   }

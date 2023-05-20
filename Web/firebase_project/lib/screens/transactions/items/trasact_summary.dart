@@ -6,13 +6,13 @@ import 'package:firebase_project/screens/transactions/transaction_Prototype.dart
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListTransactionSucc extends StatelessWidget {
-  ListTransactionSucc({
+class ListTransactionSum extends StatelessWidget {
+  ListTransactionSum({
     super.key,
-    required TransacSuccDataSource transacSuccDataSource,
-  }) : _transacSuccDataSource = transacSuccDataSource;
+    required TransacSumDataSource transacSumDataSource,
+  }) : _transacSumDataSource = transacSumDataSource;
 
-  final TransacSuccDataSource _transacSuccDataSource;
+  final TransacSumDataSource _transacSumDataSource;
   final DataGridController _dataGridController = DataGridController();
 
   @override
@@ -24,24 +24,24 @@ class ListTransactionSucc extends StatelessWidget {
           controller: _dataGridController,
           selectionMode: SelectionMode.single,
           // navigationMode: GridNavigationMode.cell,
-          source: _transacSuccDataSource,
+          source: _transacSumDataSource,
           // allowSorting: true,
           // allowEditing: true,
-          allowFiltering: true,
-          columnWidthMode: ColumnWidthMode.auto,
-          gridLinesVisibility: GridLinesVisibility.both,
-          headerGridLinesVisibility: GridLinesVisibility.both,
+          columnWidthMode: ColumnWidthMode.fitByColumnName,
+          isScrollbarAlwaysShown: true,
+          // gridLinesVisibility: GridLinesVisibility.both,
+          // headerGridLinesVisibility: GridLinesVisibility.both,
           columns: [
             GridColumn(
-                columnName: 'ref',
+                columnName: 'reference',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Ref',
-                    overflow: TextOverflow.visible,
+                    'Reférence',
+                    // overflow: TextOverflow.ellipsis,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -55,7 +55,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'N°Client débité',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -67,19 +67,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'N°Client crédité',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
-                  ),
-                )),
-            GridColumn(
-                columnName: 'nomClientCred',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Nom client crédité',
-                    overflow: TextOverflow.visible,
-                    style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -91,7 +79,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'Banque',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -103,31 +91,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'Date transaction',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
-                  ),
-                )),
-            GridColumn(
-                columnName: 'dateEffect',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Date effective',
-                    overflow: TextOverflow.visible,
-                    style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
-                  ),
-                )),
-            GridColumn(
-                columnName: 'gestionnaire',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Gestionnaire',
-                    overflow: TextOverflow.visible,
-                    style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -139,7 +103,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'Montant',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -151,19 +115,7 @@ class ListTransactionSucc extends StatelessWidget {
                     "Type d'opération",
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
-                  ),
-                )),
-            GridColumn(
-                columnName: 'guichet',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Guichet',
-                    overflow: TextOverflow.visible,
-                    style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
             GridColumn(
@@ -175,7 +127,7 @@ class ListTransactionSucc extends StatelessWidget {
                     'Approuvé',
                     overflow: TextOverflow.visible,
                     style: GoogleFonts.lato(
-                        textStyle: Theme.of(context).textTheme.titleSmall),
+                        textStyle: Theme.of(context).textTheme.bodyMedium),
                   ),
                 )),
           ]),
@@ -183,8 +135,8 @@ class ListTransactionSucc extends StatelessWidget {
   }
 }
 
-class TransacSuccDataSource extends DataGridSource {
-  TransacSuccDataSource(List<TransactionPrototype> transaction) {
+class TransacSumDataSource extends DataGridSource {
+  TransacSumDataSource(List<TransactionPrototype> transaction) {
     dataGridRows = transaction
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
               DataGridCell(columnName: 'ref', value: dataGridRow.ref),
@@ -192,20 +144,12 @@ class TransacSuccDataSource extends DataGridSource {
                   columnName: 'numCliDeb', value: dataGridRow.numCliDeb),
               DataGridCell(
                   columnName: 'numCliCred', value: dataGridRow.numCliCred),
-              DataGridCell(
-                  columnName: 'nomClientCred',
-                  value: dataGridRow.nomClientCred),
               DataGridCell(columnName: 'banque', value: dataGridRow.banque),
               DataGridCell(
                   columnName: 'dateTransac', value: dataGridRow.dateTransac),
-              DataGridCell(
-                  columnName: 'dateEffect', value: dataGridRow.dateEffect),
-              DataGridCell(
-                  columnName: 'gestionnaire', value: dataGridRow.gestionnaire),
               DataGridCell(columnName: 'montant', value: dataGridRow.montant),
               DataGridCell(
                   columnName: 'typeOperat', value: dataGridRow.typeOperat),
-              DataGridCell(columnName: 'guichet', value: dataGridRow.guichet),
               DataGridCell(columnName: 'approved', value: dataGridRow.approved),
             ]))
         .toList();
@@ -219,29 +163,29 @@ class TransacSuccDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         alignment: (dataGridCell.columnName == 'id' ||
                 dataGridCell.columnName == 'dateCreat')
             ? Alignment.centerRight
             : Alignment.centerLeft,
         child: Text(
           dataGridCell.value.toString(),
-          style: GoogleFonts.quicksand(fontSize: 12),
+          style: GoogleFonts.quicksand(fontSize: 10),
         ),
       );
     }).toList());
   }
 }
 
-class ReadPageTranSucc extends StatefulWidget {
-  ReadPageTranSucc({super.key});
+class ReadPageTranSum extends StatefulWidget {
+  ReadPageTranSum({super.key});
 
   @override
-  State<ReadPageTranSucc> createState() => _ReadPageTranSuccState();
+  State<ReadPageTranSum> createState() => _ReadPageTranSumState();
 }
 
-class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
-  late TransacSuccDataSource _transacSuccDataSource;
+class _ReadPageTranSumState extends State<ReadPageTranSum> {
+  late TransacSumDataSource _TransacSumDataSource;
 
   //   @override
   // void initState() {
@@ -260,9 +204,9 @@ class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
             return Text("Something is wron ${snapshot.error}");
           } else if (snapshot.hasData) {
             final transactions = snapshot.data!;
-            _transacSuccDataSource = TransacSuccDataSource(transactions);
-            return ListTransactionSucc(
-                transacSuccDataSource: _transacSuccDataSource);
+            _TransacSumDataSource = TransacSumDataSource(transactions);
+            return ListTransactionSum(
+                transacSumDataSource: _TransacSumDataSource);
           } else {
             return const Center(child: CircularProgressIndicator());
           }

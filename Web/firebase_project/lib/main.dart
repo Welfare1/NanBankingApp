@@ -6,6 +6,7 @@ import 'firebase_options.dart';
 import 'LoginPage.dart';
 import 'UserPage.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'providerPackage.dart';
 import 'package:firebase_project/screens/transactions/items/dropButtonBnk.dart';
 
@@ -38,6 +39,21 @@ class MyApp extends StatelessWidget {
           // Notice that the counter didn't reset back to zero; the application
           // is not restarted.
           primarySwatch: Colors.blue,
+          textTheme: TextTheme(
+              bodySmall: GoogleFonts.hind(fontSize: 10, color: Colors.black),
+              bodyMedium: GoogleFonts.hind(fontSize: 11, color: Colors.black),
+              titleSmall: GoogleFonts.poppins(
+                  fontSize: 13,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+              titleMedium: GoogleFonts.poppins(
+                  fontSize: 15,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+              titleLarge: GoogleFonts.poppins(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold)),
         ),
         // home: LoginPage(),
         // home: UserPage(),
