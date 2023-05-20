@@ -1,16 +1,15 @@
 import 'package:firebase_project/screens/transactions/transaction_Prototype.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:firebase_project/constants.dart';
 import 'package:date_field/date_field.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_project/screens/transactions/items/dropButtonBnk.dart';
-import 'package:firebase_project/constants.dart';
+
 import 'package:firebase_project/screens/Customer/items/radioHF.dart';
-import 'package:firebase_project/screens/Customer/customers.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_project/providerPackage.dart';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -397,7 +396,7 @@ class _TransactionForm extends State<TransactionForm> {
                                                       : contrNumCliDeb.text,
                                                   banque: drpValueBank,
                                                   dateTransac: DateTime.now(),
-                                                  dateEffect: selectDate,
+                                                  dateEffect: selectDateEFF,
                                                   gestionnaire: "GEST001",
                                                   montant: double.parse(
                                                       contrMontant.text),
@@ -445,7 +444,7 @@ class _TransactionForm extends State<TransactionForm> {
                                                       : contrNumCliDeb.text,
                                                   banque: drpValueBank,
                                                   dateTransac: DateTime.now(),
-                                                  dateEffect: selectDate,
+                                                  dateEffect: selectDateEFF,
                                                   gestionnaire: "GEST001",
                                                   montant: double.parse(
                                                       contrMontant.text),

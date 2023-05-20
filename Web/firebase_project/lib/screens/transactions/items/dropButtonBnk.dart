@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_project/constants.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_project/providerPackage.dart';
 
 /// Flutter code sample for [DropdownButton].
 
