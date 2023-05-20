@@ -35,14 +35,17 @@ class TransactionPrototype {
   static TransactionPrototype fromJson(Map<String, dynamic> map) {
     return TransactionPrototype(
         ref: map["ref"] ?? "",
+        numCliDeb: map["numCliDeb"] ?? "",
         numCliCred: map["numCliCred"] ?? "",
-        nomClientCred: map["nomClientCred"] ?? "",
+        banque: map["banque"] ?? "",
+        nomClientCred: map["nomCliCred"] ?? "",
         dateTransac: convertTimestampToDateTime(map["dateTransac"] ?? 0),
         dateEffect: convertTimestampToDateTime(map["dateEffect"] ?? 0),
         gestionnaire: map["gestionnaire"] ?? "",
-        montant: map["solde"] ?? 0.0,
+        montant: map["montant"] ?? 0.0,
         typeOperat: map["typeOperat"] ?? "",
-        guichet: map["guichet"] ?? "");
+        guichet: map["guichet"] ?? "",
+        approved: map["approved"] ?? true);
   }
 
   static List<Map<String, dynamic>> transacListTest = [

@@ -1,16 +1,15 @@
 import 'package:firebase_project/screens/transactions/transaction_Prototype.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:firebase_project/constants.dart';
 import 'package:date_field/date_field.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_project/screens/transactions/items/dropButtonBnk.dart';
-import 'package:firebase_project/constants.dart';
+
 import 'package:firebase_project/screens/Customer/items/radioHF.dart';
-import 'package:firebase_project/screens/Customer/customers.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_project/providerPackage.dart';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -358,14 +357,9 @@ class _TransactionForm extends State<TransactionForm> {
                                           : "NAWARI_00")
                                   .then((value) {
                                 if (value[0] != -1 && value[1] != -1) {
-                                  print("value 1 :${value[0]}");
-                                  print("value 1 :${value[1]}");
-
                                   //Instructions transfert solde débiteur
                                   if (double.parse(contrMontant.text) >
                                       ((value[0]["solde"]) ?? 0)) {
-                                    print(
-                                        "value == :${((value[0]["solde"]) ?? 0)}");
                                     //Snackbar pour le solde insuffisant
                                     ScaffoldMessenger.of(context)
                                       ..hideCurrentSnackBar()
@@ -383,9 +377,6 @@ class _TransactionForm extends State<TransactionForm> {
                                             context)
                                         .then((vx) {
                                       if (vx == "CONFIRMER") {
-                                        print("reponse:$vx");
-                                        print(
-                                            "Solde du débiteur: ${value[0]["solde"]}");
                                         if (selectDateEFF
                                             .isBefore(DateTime.now())) {
                                           final TransactionPrototype trans =
@@ -405,7 +396,7 @@ class _TransactionForm extends State<TransactionForm> {
                                                       : contrNumCliDeb.text,
                                                   banque: drpValueBank,
                                                   dateTransac: DateTime.now(),
-                                                  dateEffect: selectDate,
+                                                  dateEffect: selectDateEFF,
                                                   gestionnaire: "GEST001",
                                                   montant: double.parse(
                                                       contrMontant.text),
@@ -453,7 +444,7 @@ class _TransactionForm extends State<TransactionForm> {
                                                       : contrNumCliDeb.text,
                                                   banque: drpValueBank,
                                                   dateTransac: DateTime.now(),
-                                                  dateEffect: selectDate,
+                                                  dateEffect: selectDateEFF,
                                                   gestionnaire: "GEST001",
                                                   montant: double.parse(
                                                       contrMontant.text),
@@ -536,9 +527,7 @@ class _TransactionForm extends State<TransactionForm> {
       {required TransactionPrototype transactionPrototype}) async {
     final docTransacLengthReff =
         FirebaseFirestore.instance.collection("Transactions");
-    print("Instanciation creatTrans succèes");
     QuerySnapshot snapshotss = await docTransacLengthReff.get();
-    print("Obtentionxxx");
     int docTransacLength = snapshotss.size;
     setState(() {
       nextId = "TR5646357${(docTransacLength++).toString().padLeft(3, '0')}";
@@ -562,7 +551,6 @@ class _TransactionForm extends State<TransactionForm> {
       "approved": transactionPrototype.approved,
       "fraud": transactionPrototype.fraud,
     };
-    print(nextId);
     await docTransac.set(json);
     return nextId;
   }
@@ -573,9 +561,7 @@ class _TransactionForm extends State<TransactionForm> {
     //The difference between these two collections is the approuved mention.
     final docTransacLengthReff =
         FirebaseFirestore.instance.collection("Transactions_coming");
-    print("Instanciation creatTransComing succèes");
     QuerySnapshot snapshotss = await docTransacLengthReff.get();
-    print("Obtentionxxx");
     int docTransacLength = snapshotss.size;
     setState(() {
       nextId = "TC5646357${(docTransacLength++).toString().padLeft(3, '0')}";
@@ -599,7 +585,6 @@ class _TransactionForm extends State<TransactionForm> {
       "approved": transactionPrototype.approved,
       "fraud": transactionPrototype.fraud,
     };
-    print(nextId);
     await docTransac.set(json);
     return nextId;
   }
@@ -681,7 +666,6 @@ class _TransactionForm extends State<TransactionForm> {
             dropdownValueTrans = value!;
             active = value == "Virement";
             drpValueBank = listBank.first;
-            print("drpValueBank form menu:$drpValueBank");
           });
         },
         items: list.map<DropdownMenuItem<String>>((String value) {
@@ -748,6 +732,5 @@ class _TransactionForm extends State<TransactionForm> {
       "solde": value[1]["solde"] + double.parse(contrMontant.text),
       "transactions": transacReceiv
     });
-    print(4);
   }
 }

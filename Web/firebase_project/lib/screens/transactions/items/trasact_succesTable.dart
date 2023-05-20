@@ -2,14 +2,17 @@ import 'package:firebase_project/screens/Customer/customers.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:firebase_project/screens/transactions/transaction_Prototype.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListCustomer extends StatelessWidget {
-  ListCustomer({
+class ListTransactionSucc extends StatelessWidget {
+  ListTransactionSucc({
     super.key,
-    required CustomerDataSource customerDataSource,
-  }) : _customerDataSource = customerDataSource;
+    required TransacSuccDataSource transacSuccDataSource,
+  }) : _transacSuccDataSource = transacSuccDataSource;
 
-  final CustomerDataSource _customerDataSource;
+  final TransacSuccDataSource _transacSuccDataSource;
   final DataGridController _dataGridController = DataGridController();
 
   @override
@@ -21,7 +24,7 @@ class ListCustomer extends StatelessWidget {
           controller: _dataGridController,
           selectionMode: SelectionMode.single,
           // navigationMode: GridNavigationMode.cell,
-          source: _customerDataSource,
+          source: _transacSuccDataSource,
           // allowSorting: true,
           // allowEditing: true,
           allowFiltering: true,
@@ -30,114 +33,74 @@ class ListCustomer extends StatelessWidget {
           headerGridLinesVisibility: GridLinesVisibility.both,
           columns: [
             GridColumn(
-                columnName: 'id',
+                columnName: 'ref',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Id',
+                    'Ref',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'nom',
+                columnName: 'numCliDeb',
                 filterPopupMenuOptions: const FilterPopupMenuOptions(
                     filterMode: FilterMode.checkboxFilter),
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Nom',
+                    'N°Client débité',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'prenoms',
+                columnName: 'numCliCred',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Prénoms',
+                    'N°Client crédité',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'dateNaissance',
+                columnName: 'nomClientCred',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Date de naissance',
+                    'Nom client crédité',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'profession',
+                columnName: 'banque',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Profession',
+                    'Banque',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'numPce',
+                columnName: 'dateTrasanc',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'N°Pièce Id',
+                    'Date transaction',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'numTel',
+                columnName: 'dateEffect',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'N°téléphone',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-            GridColumn(
-                columnName: 'solde',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Solde',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-            GridColumn(
-                columnName: 'mail',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Adresse mail',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-            GridColumn(
-                columnName: 'sexe',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Sexe',
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )),
-            GridColumn(
-                columnName: 'typeCpt',
-                label: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  alignment: Alignment.centerLeft,
-                  child: const Text(
-                    'Type de compte',
+                    'Date effective',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
@@ -152,22 +115,42 @@ class ListCustomer extends StatelessWidget {
                   ),
                 )),
             GridColumn(
-                columnName: 'nombre de transaction',
+                columnName: 'montant',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Nb transactions',
+                    'Montant',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
             GridColumn(
-                columnName: 'dateCreat',
+                columnName: 'typeOperat',
                 label: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.centerLeft,
                   child: const Text(
-                    'Date de creation',
+                    "Type d'opération",
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )),
+            GridColumn(
+                columnName: 'guichet',
+                label: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    'Guichet',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )),
+            GridColumn(
+                columnName: 'approved',
+                label: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  alignment: Alignment.centerLeft,
+                  child: const Text(
+                    'Approuvé',
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
@@ -176,30 +159,30 @@ class ListCustomer extends StatelessWidget {
   }
 }
 
-class CustomerDataSource extends DataGridSource {
-  CustomerDataSource(List<Customer> customer) {
-    dataGridRows = customer
+class TransacSuccDataSource extends DataGridSource {
+  TransacSuccDataSource(List<TransactionPrototype> transaction) {
+    dataGridRows = transaction
         .map<DataGridRow>((dataGridRow) => DataGridRow(cells: [
-              DataGridCell(columnName: 'id', value: dataGridRow.id),
-              DataGridCell(columnName: 'nom', value: dataGridRow.nom),
-              DataGridCell(columnName: 'prenoms', value: dataGridRow.prenoms),
+              DataGridCell(columnName: 'ref', value: dataGridRow.ref),
               DataGridCell(
-                  columnName: 'dateNaissance',
-                  value: dataGridRow.dateNaissance),
+                  columnName: 'numCliDeb', value: dataGridRow.numCliDeb),
               DataGridCell(
-                  columnName: 'profession', value: dataGridRow.profession),
-              DataGridCell(columnName: 'numPce', value: dataGridRow.numPce),
-              DataGridCell(columnName: 'numTel', value: dataGridRow.numTel),
-              DataGridCell(columnName: 'solde', value: dataGridRow.solde),
-              DataGridCell(columnName: 'mail', value: dataGridRow.mail),
-              DataGridCell(columnName: 'sexe', value: dataGridRow.sexe),
-              DataGridCell(columnName: 'typeCpt', value: dataGridRow.typeCpt),
+                  columnName: 'numCliCred', value: dataGridRow.numCliCred),
+              DataGridCell(
+                  columnName: 'nomClientCred',
+                  value: dataGridRow.nomClientCred),
+              DataGridCell(columnName: 'banque', value: dataGridRow.banque),
+              DataGridCell(
+                  columnName: 'dateTransac', value: dataGridRow.dateTransac),
+              DataGridCell(
+                  columnName: 'dateEffect', value: dataGridRow.dateEffect),
               DataGridCell(
                   columnName: 'gestionnaire', value: dataGridRow.gestionnaire),
+              DataGridCell(columnName: 'montant', value: dataGridRow.montant),
               DataGridCell(
-                  columnName: 'nbTransac', value: dataGridRow.nbTransac),
-              DataGridCell(
-                  columnName: 'dateCreat', value: dataGridRow.dateCreat),
+                  columnName: 'typeOperat', value: dataGridRow.typeOperat),
+              DataGridCell(columnName: 'guichet', value: dataGridRow.guichet),
+              DataGridCell(columnName: 'approved', value: dataGridRow.approved),
             ]))
         .toList();
   }
@@ -217,8 +200,68 @@ class CustomerDataSource extends DataGridSource {
                 dataGridCell.columnName == 'dateCreat')
             ? Alignment.centerRight
             : Alignment.centerLeft,
-        child: Text(dataGridCell.value.toString()),
+        child: Text(
+          dataGridCell.value.toString(),
+          style: GoogleFonts.quicksand(fontSize: 12),
+        ),
       );
     }).toList());
   }
+}
+
+class ReadPageTranSucc extends StatefulWidget {
+  ReadPageTranSucc({super.key});
+
+  @override
+  State<ReadPageTranSucc> createState() => _ReadPageTranSuccState();
+}
+
+class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
+  late TransacSuccDataSource _transacSuccDataSource;
+
+  //   @override
+  // void initState() {
+  // _customerDataSource = CustomerDataSource(_customers);
+  //   super.initState();
+
+  // }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: StreamBuilder<List<TransactionPrototype>>(
+        stream: readUsers(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something is wron ${snapshot.error}");
+          } else if (snapshot.hasData) {
+            final transactions = snapshot.data!;
+            _transacSuccDataSource = TransacSuccDataSource(transactions);
+            return ListTransactionSucc(
+                transacSuccDataSource: _transacSuccDataSource);
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+    );
+  }
+
+  Stream<List<TransactionPrototype>> readUsers() => FirebaseFirestore.instance
+      .collection("Transactions")
+      .snapshots()
+      .map((snapshots) => snapshots.docs
+          .map((doc) => TransactionPrototype.fromJson(doc.data()))
+          .toList()
+          .reversed
+          .toList());
+
+  Widget builderUser(TransactionPrototype transaction) => ListTile(
+        leading: Container(
+          color: Colors.lightBlue,
+          child: Text(transaction.gestionnaire),
+        ),
+        title: Text(transaction.gestionnaire),
+        subtitle: Text("customer.dateNaissance"),
+      );
 }
