@@ -25,6 +25,46 @@ class HeadMain extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/ci.png"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/gambie.jpg"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/benin.png"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/burkina.png"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/mali.jpg"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/nigeria.jpg"),
+              ),
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: Image.asset("images/togo.png"),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),

@@ -559,13 +559,17 @@ class _TransactionForm extends State<TransactionForm> {
       {required TransactionPrototype transactionPrototype}) async {
     final docTransacLengthReff =
         FirebaseFirestore.instance.collection("Transactions");
+
     QuerySnapshot snapshotss = await docTransacLengthReff.get();
     int docTransacLength = snapshotss.size;
     docTransacLength += 1;
+
+    int documentCount = await countDocumentsInCollection('Transactions');
+    documentCount++;
     setState(() {
       nextId = "TR5646357${(docTransacLength).toString().padLeft(3, '0')}";
     });
-
+    print("Id créer:$documentCount");
     final docTransac = FirebaseFirestore.instance
         .collection("Transactions")
         .doc(nextId); //"NAW001"+"v"
@@ -587,6 +591,13 @@ class _TransactionForm extends State<TransactionForm> {
     await docTransac.set(json);
     print(nextId);
     return nextId;
+  }
+
+  Future<int> countDocumentsInCollection(String collectionName) async {
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection(collectionName).get();
+
+    return snapshot.docs.length;
   }
 
   //The following question allow us to creat an coming transaction

@@ -8,6 +8,7 @@ import 'package:firebase_project/constants.dart';
 import 'package:firebase_project/screens/Customer/items/radioHF.dart';
 import '../customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_project/screens/items/solde_section.dart';
 
 class CustForm extends StatefulWidget {
   const CustForm({super.key});
@@ -363,11 +364,7 @@ class _CustFormState extends State<CustForm> {
               ],
             ),
           ),
-          Flexible(
-              flex: 2,
-              child: Container(
-                color: Colors.blueAccent,
-              ))
+          const Flexible(flex: 2, child: SoldeSection())
         ],
       ),
     );
