@@ -219,7 +219,7 @@ class TransacSuccDataSource extends DataGridSource {
     return DataGridRowAdapter(
         cells: row.getCells().map<Widget>((dataGridCell) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
         alignment: (dataGridCell.columnName == 'id' ||
                 dataGridCell.columnName == 'dateCreat')
             ? Alignment.centerRight
@@ -286,6 +286,6 @@ class _ReadPageTranSuccState extends State<ReadPageTranSucc> {
           child: Text(transaction.gestionnaire),
         ),
         title: Text(transaction.gestionnaire),
-        subtitle: Text("customer.dateNaissance"),
+        subtitle: const Text("customer.dateNaissance"),
       );
 }

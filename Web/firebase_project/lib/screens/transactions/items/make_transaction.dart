@@ -53,13 +53,54 @@ class _TransactionForm extends State<TransactionForm> {
           Flexible(
             flex: 3,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/bat.jpeg"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/bni.png"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/boa.jpg"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/bpop.jpeg"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/eco.jpg"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/nsia.jpeg"),
+                          ),
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Image.asset("images/versus.png"),
+                          ),
+                        ],
+                      ),
                       Container(
                           margin: const EdgeInsets.only(top: 10),
                           child: const Text("Informations relatives")),
@@ -69,17 +110,15 @@ class _TransactionForm extends State<TransactionForm> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Flexible(
-                              child: Container(
-                                  constraints:
-                                      const BoxConstraints(maxWidth: 250),
+                              child: SizedBox(
+                                  width: 250,
                                   // padding:
                                   //     const EdgeInsets.symmetric(horizontal: 15.0),
                                   child: dropButtonTrans()),
                             ),
                             Flexible(
-                              child: Container(
-                                constraints:
-                                    const BoxConstraints(maxWidth: 250),
+                              child: SizedBox(
+                                width: 250,
                                 // padding:
                                 //     const EdgeInsets.symmetric(horizontal: 15.0),
                                 child: TextFormField(
@@ -118,9 +157,8 @@ class _TransactionForm extends State<TransactionForm> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Flexible(
-                                child: Container(
-                                  constraints:
-                                      const BoxConstraints(maxWidth: 250),
+                                child: SizedBox(
+                                  width: 250,
                                   // padding:
                                   //     const EdgeInsets.symmetric(horizontal: 15.0),
                                   child: TextFormField(
@@ -146,9 +184,8 @@ class _TransactionForm extends State<TransactionForm> {
                                 ),
                               ),
                               Flexible(
-                                child: Container(
-                                  constraints:
-                                      const BoxConstraints(maxWidth: 250),
+                                child: SizedBox(
+                                  width: 250,
                                   child: DateTimeFormField(
                                     dateFormat: DateFormat.yMd('en_US'),
                                     mode: DateTimeFieldPickerMode.date,
@@ -167,7 +204,7 @@ class _TransactionForm extends State<TransactionForm> {
                                     autovalidateMode: AutovalidateMode.always,
                                     validator: (DateTime? e) =>
                                         (e?.day ?? 0) == -1
-                                            ? 'Please not the first day'
+                                            ? 'Veuillez choisir une date'
                                             : null,
                                     onDateSelected: (value) {
                                       print(value.runtimeType);
@@ -190,9 +227,8 @@ class _TransactionForm extends State<TransactionForm> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Flexible(
-                                    child: Container(
-                                      constraints:
-                                          const BoxConstraints(maxWidth: 250),
+                                    child: SizedBox(
+                                      width: 250,
                                       // padding:
                                       //     const EdgeInsets.symmetric(horizontal: 15.0),
                                       child: TextFormField(
@@ -232,9 +268,8 @@ class _TransactionForm extends State<TransactionForm> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Flexible(
-                                    child: Container(
-                                      constraints:
-                                          const BoxConstraints(maxWidth: 250),
+                                    child: SizedBox(
+                                      width: 250,
                                       child: TextFormField(
                                         // The validator receives the text that the user has entered.
                                         controller: contrNumCliCred,
@@ -258,13 +293,12 @@ class _TransactionForm extends State<TransactionForm> {
                                       ),
                                     ),
                                   ),
-                                  Flexible(
-                                    child: Container(
-                                        constraints:
-                                            const BoxConstraints(maxWidth: 250),
+                                  const Flexible(
+                                    child: SizedBox(
+                                        width: 250,
                                         // padding:
                                         //    I call the dropButton for the choice of the different kind of bank |NAWARI|BNI|ECOBANK|...
-                                        child: const DropdownButtonTypBnk()),
+                                        child: DropdownButtonTypBnk()),
                                   ),
                                 ],
                               ),
@@ -276,9 +310,8 @@ class _TransactionForm extends State<TransactionForm> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Flexible(
-                                    child: Container(
-                                      constraints:
-                                          const BoxConstraints(maxWidth: 250),
+                                    child: SizedBox(
+                                      width: 250,
                                       // padding:
                                       //     const EdgeInsets.symmetric(horizontal: 15.0),
                                       child: TextFormField(
@@ -302,9 +335,8 @@ class _TransactionForm extends State<TransactionForm> {
                                     ),
                                   ),
                                   Flexible(
-                                    child: Container(
-                                      constraints:
-                                          const BoxConstraints(maxWidth: 250),
+                                    child: SizedBox(
+                                      width: 250,
                                       // padding:
                                       //     const EdgeInsets.symmetric(horizontal: 15.0),
                                       child: DateTimeFormField(
@@ -325,8 +357,8 @@ class _TransactionForm extends State<TransactionForm> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (DateTime? e) =>
-                                            (e?.day ?? 1) == 1
-                                                ? 'Please not the first day'
+                                            (e?.day ?? 0) == 1
+                                                ? 'Veuillez choisir une date'
                                                 : null,
                                         onDateSelected: (value) {
                                           print(value.runtimeType);
@@ -529,8 +561,9 @@ class _TransactionForm extends State<TransactionForm> {
         FirebaseFirestore.instance.collection("Transactions");
     QuerySnapshot snapshotss = await docTransacLengthReff.get();
     int docTransacLength = snapshotss.size;
+    docTransacLength += 1;
     setState(() {
-      nextId = "TR5646357${(docTransacLength++).toString().padLeft(3, '0')}";
+      nextId = "TR5646357${(docTransacLength).toString().padLeft(3, '0')}";
     });
 
     final docTransac = FirebaseFirestore.instance
@@ -552,6 +585,7 @@ class _TransactionForm extends State<TransactionForm> {
       "fraud": transactionPrototype.fraud,
     };
     await docTransac.set(json);
+    print(nextId);
     return nextId;
   }
 
@@ -563,8 +597,9 @@ class _TransactionForm extends State<TransactionForm> {
         FirebaseFirestore.instance.collection("Transactions_coming");
     QuerySnapshot snapshotss = await docTransacLengthReff.get();
     int docTransacLength = snapshotss.size;
+    docTransacLength += 1;
     setState(() {
-      nextId = "TC5646357${(docTransacLength++).toString().padLeft(3, '0')}";
+      nextId = "TC5646357${(docTransacLength).toString().padLeft(3, '0')}";
     });
 
     final docTransac = FirebaseFirestore.instance

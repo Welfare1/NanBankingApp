@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               bodySmall: GoogleFonts.hind(fontSize: 10, color: Colors.black),
               bodyMedium: GoogleFonts.hind(fontSize: 11, color: Colors.black),
               titleSmall: GoogleFonts.poppins(
-                  fontSize: 13,
+                  fontSize: 12,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
               titleMedium: GoogleFonts.poppins(
