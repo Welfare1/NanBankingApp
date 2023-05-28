@@ -42,7 +42,7 @@ class SoldeSection extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "VISA",
+                  "MasterCard",
                   style: GoogleFonts.lato(
                       textStyle: Theme.of(context).textTheme.titleMedium),
                 ),

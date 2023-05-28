@@ -50,15 +50,15 @@ class TransactionPrototype {
 
   static List<Map<String, dynamic>> transacListTest = [
     {
-      "ref": "NAW001",
-      "numCliCred": "NAWAR001004",
-      "nomClientCred": "NAWAR001004",
-      "dateTransac": DateTime(2000, 1, 1),
-      "dateEffect": DateTime(2023, 5, 14),
-      "gestionnaire": "GEST001",
-      "montant": 150000,
-      "typeOperat": "Versement",
-      "guichet": "NULL",
+      "ref": "",
+      "numCliCred": "",
+      "nomClientCred": "",
+      "dateTransac": DateTime.now(),
+      "dateEffect": DateTime.now(),
+      "gestionnaire": "",
+      "montant": 0,
+      "typeOperat": "",
+      "guichet": "",
     }
   ];
 

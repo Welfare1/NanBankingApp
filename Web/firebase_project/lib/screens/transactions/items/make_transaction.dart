@@ -11,6 +11,9 @@ import 'package:firebase_project/screens/Customer/items/radioHF.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:firebase_project/screens/Customer/items/grille_tarif.dart';
+import 'package:firebase_project/screens/items/solde_section.dart';
 
 class TransactionForm extends StatefulWidget {
   const TransactionForm({super.key});
@@ -28,6 +31,9 @@ class _TransactionForm extends State<TransactionForm> {
   final contrBanque = TextEditingController();
   final contrMontant = TextEditingController();
   final contrTypeOper = TextEditingController();
+
+  //For the Spinner's loading
+  bool showSpinner = false;
 
   //For the dateFormField value
   DateTime selectDate = DateTime.now();
@@ -377,6 +383,7 @@ class _TransactionForm extends State<TransactionForm> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
+                              startLoading();
                               // this is the firebase instance calling | To have the differents response for the following cases..
                               getValueTrans(
                                       idTrans: "Customers",
@@ -393,6 +400,7 @@ class _TransactionForm extends State<TransactionForm> {
                                   if (double.parse(contrMontant.text) >
                                       ((value[0]["solde"]) ?? 0)) {
                                     //Snackbar pour le solde insuffisant
+                                    stopLoading();
                                     ScaffoldMessenger.of(context)
                                       ..hideCurrentSnackBar()
                                       ..showSnackBar(mySnackBar(
@@ -400,12 +408,17 @@ class _TransactionForm extends State<TransactionForm> {
                                           "Veuillez vérifier le solde du client: ${contrNumCliDeb.text}",
                                           ContentType.failure));
                                   } else {
+                                    startLoading();
                                     //Instructions pour le transfert possible
+
                                     var receivName = (drpValueBank == "NAWARI")
                                         ? "${value[1]["nom"] ?? ""} ${value[1]["prenoms"] ?? ""}"
                                         : contrNomClientCred.text;
+                                    var nbFormat = NumberFormat("#,###");
+                                    stopLoading();
+
                                     myAlertDialog(
-                                            "Vous allez effectué un ${dropdownValueTrans.toLowerCase()} de ${contrMontant.text} XOF \nde ${value[0]["nom"]} ${value[0]["prenoms"] ?? ""},\nvers le client $receivName de la banque $drpValueBank \nVoulez-vous confirmer ?",
+                                            "Vous allez effectué un ${dropdownValueTrans.toLowerCase()} de ${nbFormat.format(double.parse(contrMontant.text))} XOF \nde ${value[0]["nom"]} ${value[0]["prenoms"] ?? ""},\nvers le client $receivName de la banque $drpValueBank \nTotal: ${nbFormat.format(double.parse(contrMontant.text))} XOF + ${nbFormat.format(fraisTransac(contrMontant.text))} XOF FRAIS \nVoulez-vous confirmer ?",
                                             context)
                                         .then((vx) {
                                       if (vx == "CONFIRMER") {
@@ -435,6 +448,7 @@ class _TransactionForm extends State<TransactionForm> {
                                                   typeOperat:
                                                       dropdownValueTrans,
                                                   guichet: "Guichet-00");
+                                          startLoading();
 
                                           creatTrans(
                                                   transactionPrototype: trans)
@@ -450,6 +464,7 @@ class _TransactionForm extends State<TransactionForm> {
                                             // final docTransac = FirebaseFirestore.instance
                                             //     .collection("Transactions")
                                             //     .doc(nextId);
+                                            stopLoading();
                                             ScaffoldMessenger.of(context)
                                               ..hideCurrentSnackBar()
                                               ..showSnackBar(mySnackBar(
@@ -459,6 +474,7 @@ class _TransactionForm extends State<TransactionForm> {
                                           });
                                         } else {
                                           //Transfert ajournée
+                                          startLoading();
                                           final TransactionPrototype trans =
                                               TransactionPrototype(
                                                   ref: "",
@@ -498,6 +514,7 @@ class _TransactionForm extends State<TransactionForm> {
                                             // final docTransac = FirebaseFirestore.instance
                                             //     .collection("Transactions")
                                             //     .doc(nextId);
+                                            stopLoading();
                                             ScaffoldMessenger.of(context)
                                               ..hideCurrentSnackBar()
                                               ..showSnackBar(mySnackBar(
@@ -514,7 +531,9 @@ class _TransactionForm extends State<TransactionForm> {
                                 }
                                 //Cas d'erreur des comptes.
                                 else if (value[0] == -1 || value[1] == -1) {
+                                  startLoading();
                                   if (value[0] == -1) {
+                                    stopLoading();
                                     ScaffoldMessenger.of(context)
                                       ..hideCurrentSnackBar()
                                       ..showSnackBar(mySnackBar(
@@ -522,6 +541,7 @@ class _TransactionForm extends State<TransactionForm> {
                                           "le numero client débité: ${contrNumCliDeb.text} n'est pas un numéro client valide ",
                                           ContentType.warning));
                                   } else {
+                                    stopLoading();
                                     ScaffoldMessenger.of(context)
                                       ..hideCurrentSnackBar()
                                       ..showSnackBar(mySnackBar(
@@ -540,14 +560,28 @@ class _TransactionForm extends State<TransactionForm> {
                       ),
                     ],
                   ),
-                )
+                ),
+                if (showSpinner)
+                  Center(
+                    child: Container(
+                      height: 80,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage("images/nawari1.png"))),
+                      child: const SpinKitWave(
+                        color: Colors.orange,
+                        size: 30,
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
           Flexible(
               flex: 2,
-              child: Container(
-                color: Colors.blueAccent,
+              child: Column(
+                children: [PricingTableWidget(), SoldeSection()],
               ))
         ],
       ),
@@ -573,6 +607,7 @@ class _TransactionForm extends State<TransactionForm> {
     final docTransac = FirebaseFirestore.instance
         .collection("Transactions")
         .doc(nextId); //"NAW001"+"v"
+
     final json = {
       "ref": docTransac.id, // later
       "numCliDeb": transactionPrototype.numCliDeb,
@@ -738,7 +773,7 @@ class _TransactionForm extends State<TransactionForm> {
         title: const Text('CONFIRMATION'),
         content: Text(
           content,
-          maxLines: 4,
+          maxLines: 5,
         ),
         actions: <Widget>[
           TextButton(
@@ -761,6 +796,7 @@ class _TransactionForm extends State<TransactionForm> {
         .doc((contrNumCliDeb.text.isNotEmpty)
             ? contrNumCliDeb.text
             : "NAWARI_00");
+
     final docTransacReceiv = FirebaseFirestore.instance
         .collection("Customers")
         .doc((drpValueBank == "NAWARI") ? contrNumCliCred.text : "NAWARI_00");
@@ -769,14 +805,70 @@ class _TransactionForm extends State<TransactionForm> {
     transacSender.add(idTransac);
     var transacReceiv = value[1]["transactions"] ?? [""];
     transacReceiv.add(idTransac);
+    var nbTransacSender = value[0]["nbTransac"] ?? 0;
+    var nbTransacReceiv = value[1]["nbTransac"] ?? 0;
 
     docTransacSend.update({
-      "solde": value[0]["solde"] - double.parse(contrMontant.text),
-      "transactions": transacSender
+      "solde": value[0]["solde"] -
+          (double.parse(contrMontant.text) + fraisTransac(contrMontant.text)),
+      "transactions": transacSender,
+      "nbTransac": nbTransacSender + 1
     });
+    //Bank case condition | in transaction out case
+    double fraisExoneration = (contrNumCliDeb.text.isNotEmpty)
+        ? 0.0
+        : fraisTransac(contrMontant.text);
     docTransacReceiv.update({
-      "solde": value[1]["solde"] + double.parse(contrMontant.text),
-      "transactions": transacReceiv
+      "solde": value[1]["solde"] +
+          double.parse(contrMontant.text) +
+          fraisExoneration,
+      "transactions": transacReceiv,
+      "nbTransac": nbTransacReceiv + 1
     });
+  }
+
+  void startLoading() {
+    setState(() {
+      showSpinner = true;
+    });
+  }
+
+  void stopLoading() {
+    setState(() {
+      showSpinner = false;
+    });
+  }
+
+  double fraisTransac(String montant) {
+    double balance = double.parse(montant);
+    if (balance <= 10000) {
+      return 0;
+    } else if (balance <= 100000) {
+      return 500;
+    } else if (balance <= 500000) {
+      return 1000;
+    } else if (balance <= 1000000) {
+      return 2000;
+    } else {
+      return 3000;
+    }
+  }
+
+  Future<dynamic> getSD(List<String> transactions) async {
+    try {
+      final docTransacCollection = FirebaseFirestore.instance;
+      List<DocumentReference<Map<String, dynamic>>> collection = transactions
+          .map((transac) =>
+              docTransacCollection.collection("Transactions").doc(transac))
+          .toList();
+      List<Future<DocumentSnapshot<Map<String, dynamic>>>> getCollection =
+          await collection.map((e) => e.get()).toList();
+      var getData =
+          getCollection.map((e) => e.then((value) => value.data())).toList();
+      return getData;
+    } catch (e) {
+      print(e);
+      return 0;
+    }
   }
 }

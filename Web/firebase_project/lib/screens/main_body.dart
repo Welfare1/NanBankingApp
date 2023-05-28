@@ -3,7 +3,6 @@ import 'package:firebase_project/screens/Customer/clients.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'acceuil.dart';
-import 'package:firebase_project/constants.dart';
 import 'package:firebase_project/screens/transactions.dart';
 
 class MainBody extends StatefulWidget {
@@ -20,7 +19,7 @@ class _MainBodyState extends State<MainBody> {
   Widget build(BuildContext context) {
     Widget SecondBox;
     if (currentPage == Page.acceuil) {
-      SecondBox = const Acceuil();
+      SecondBox = Acceuil();
     } else if (currentPage == Page.messagerie) {
       SecondBox = Container(
         color: Colors.orange,
@@ -54,7 +53,7 @@ class _MainBodyState extends State<MainBody> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Nawari/Gestionnaire",
+          "Nawari/ Gestionnaire",
           style: GoogleFonts.poppins(fontSize: 16.0, color: Colors.white),
         ),
         const SizedBox(height: 60),
@@ -69,9 +68,7 @@ class _MainBodyState extends State<MainBody> {
             const SizedBox(height: 3),
             itemBar(1, "Acceuil", Icons.home,
                 currentPage == (Page.acceuil) ? true : false),
-            itemBar(2, "Messagerie", Icons.mail_outline,
-                currentPage == (Page.messagerie) ? true : false),
-            const SizedBox(height: 3),
+
             Text(
               "Espace de travail",
               style:
@@ -80,14 +77,10 @@ class _MainBodyState extends State<MainBody> {
             itemBar(3, "Transactions", Icons.account_balance_outlined,
                 currentPage == (Page.transactions) ? true : false),
             // const SizedBox(height: 3),
-            itemBar(4, "Opérations", Icons.swap_horiz_outlined,
-                currentPage == (Page.operations) ? true : false),
             // const SizedBox(height: 3),
             itemBar(5, "Clients", Icons.people_outline,
                 currentPage == (Page.clients) ? true : false),
             // const SizedBox(height: 3),
-            itemBar(6, "Analytique", Icons.trending_up_outlined,
-                currentPage == (Page.analytique) ? true : false),
             const SizedBox(height: 60),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -101,7 +94,9 @@ class _MainBodyState extends State<MainBody> {
                   ),
                   TextButton(
                     child: const Text("Se deconnecter"),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ],
               ),
