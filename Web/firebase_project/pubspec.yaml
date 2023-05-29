@@ -46,6 +46,10 @@ dependencies:
   syncfusion_flutter_datagrid: ^21.2.4
   provider: ^6.0.5
   awesome_snackbar_content: ^0.1.1
+  syncfusion_flutter_charts: ^21.2.6
+  flutter_spinkit: ^5.2.0
+  flutter_sequence_animation: "^4.0.0"
+  quickalert: ^1.0.1
 
 dev_dependencies:
   flutter_test:

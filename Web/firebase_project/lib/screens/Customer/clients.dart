@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_project/constants.dart';
+
 import 'package:firebase_project/screens/items/headBox.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:date_field/date_field.dart';
-import 'package:intl/intl.dart';
-import 'package:firebase_project/screens/Customer/items/dropButton.dart';
-import 'package:firebase_project/constants.dart';
-import 'package:firebase_project/screens/Customer/items/radioHF.dart';
+
 import 'customers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_project/screens/Customer/items/custForm.dart';
 import 'package:firebase_project/screens/Customer/items/customersDataTable.dart';
+import 'package:firebase_project/screens/Customer/items/consultation_box.dart';
 
 class Clients extends StatefulWidget {
   const Clients({super.key});
@@ -65,7 +62,7 @@ class _ClientsState extends State<Clients> with TickerProviderStateMixin {
             children: [
               TabarNavigationClients(tabController: tabController1),
               Text(
-                "Nombre de clients : 140 ",
+                "",
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold, fontSize: 20),
               )
@@ -82,8 +79,7 @@ class _ClientsState extends State<Clients> with TickerProviderStateMixin {
               child: const CustForm(),
             ),
             Container(
-              color: Colors.red,
-              // child: ListNotes(eleveDataSource: _eleveDataSource),
+              child: ConsultationBox(),
             ),
           ]),
         ),
@@ -117,7 +113,7 @@ class TabarNavigationClients extends StatelessWidget {
         // ),
         tabs: const [
           badges.Badge(
-            badgeContent: Text('3'),
+            // badgeContent: Text('3'),
             child: Text("Comptes clients "),
           ),
           badges.Badge(
@@ -181,6 +177,6 @@ class _ReadPageState extends State<ReadPage> {
           child: Text(customer.prenoms),
         ),
         title: Text(customer.nom),
-        subtitle: Text("customer.dateNaissance"),
+        subtitle: const Text("customer.dateNaissance"),
       );
 }

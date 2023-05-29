@@ -16,6 +16,7 @@ class Customer {
   String gestionnaire;
   DateTime dateCreat;
   int nbTransac;
+  bool freeze;
 
   Customer(
       {required this.id,
@@ -31,7 +32,8 @@ class Customer {
       required this.typeCpt,
       required this.gestionnaire,
       required this.dateCreat,
-      this.nbTransac = 0});
+      this.nbTransac = 0,
+      this.freeze = false});
 
   static Customer fromJson(Map<String, dynamic> map) {
     return Customer(

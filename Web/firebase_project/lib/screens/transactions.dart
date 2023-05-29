@@ -58,7 +58,7 @@ class _TransactionsState extends State<Transactions>
             children: [
               TabarNavigation(tabController: tabController1),
               Text(
-                "17 587 200 XOF",
+                "",
                 style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold, fontSize: 20),
               ),
@@ -111,7 +111,7 @@ class TabarNavigation extends StatelessWidget {
         // ),
         tabs: const [
           badges.Badge(
-            badgeContent: Text('3'),
+            // badgeContent: Text('3'),
             child: Text(
               "Transactions actuelles ",
             ),
