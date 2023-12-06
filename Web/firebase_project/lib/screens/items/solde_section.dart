@@ -9,7 +9,6 @@ class SoldeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 190,
         margin: const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 5),
         width: double.infinity,
         padding: const EdgeInsets.all(15),
@@ -56,7 +55,7 @@ class SoldeSection extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "NAWARI",
+                      "NAWARII",
                       style: GoogleFonts.lato(
                           textStyle: Theme.of(context).textTheme.titleMedium),
                     ),
